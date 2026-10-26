@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f1ede4">
+  <meta name="description" content="Тихая полка — книжный магазин историй, к которым хочется возвращаться.">
+  <title>Тихая полка — книжный магазин</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Тихая полка — на главную">тихая<span>.</span>полка</a>
+      <nav class="main-nav" id="main-nav" aria-label="Коллекции">
+        <a href="#potter">Фэнтези</a>
+        <a href="#detectives">Детективы</a>
+        <a href="#dystopias">Антиутопии</a>
+      </nav>
+      <div class="header-actions">
+        <button class="cart-trigger" id="cart-trigger" type="button" aria-label="Открыть корзину, товаров: 0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 4h2l2.3 11.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+          <span class="cart-label">Корзина</span><span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <span class="eyebrow">Книжный магазин историй</span>
+        <h1 id="hero-title">Для тех,<br>кто читает <em>между</em><br>строк.</h1>
+        <p class="hero-copy">Собрали книги, которые остаются с вами дольше последней страницы. Выбирайте неспешно — хорошая история не любит суеты.</p>
+        <a class="text-link" href="#potter">Перейти к полкам
+          <svg viewBox="0 0 20 12" fill="none" aria-hidden="true"><path d="M1 6h17M13 1l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>
+      </div>
+      <div class="hero-mark" aria-hidden="true"><span>поля<br>тишины</span><small>издательство впечатлений</small></div>
+      <span class="hero-note">Книги — это тоже место.</span>
+    </section>
+
+    <section class="catalog-tools" aria-label="Поиск и фильтры каталога">
+      <div class="catalog-tools-label">На полках<strong id="results-count">55 книг</strong></div>
+      <div class="catalog-controls">
+        <label class="visually-hidden" for="book-search">Поиск по названию, автору или описанию</label>
+        <input class="search-field" id="book-search" type="search" placeholder="Название, автор, настроение">
+        <label class="visually-hidden" for="genre-filter">Жанр книг</label>
+        <select class="sort-select" id="genre-filter">
+          <option value="all">Все жанры</option>
+        </select>
+        <label class="visually-hidden" for="book-sort">Порядок книг</label>
+        <select class="sort-select" id="book-sort">
+          <option value="recommended">Сначала выбранное</option>
+          <option value="price-asc">В подборке: дешевле</option>
+          <option value="price-desc">В подборке: дороже</option>
+          <option value="title">В подборке: по названию</option>
+        </select>
+        <button class="tool-button" id="favorites-toggle" type="button" aria-pressed="false">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 17s-6.5-3.8-6.5-9A3.6 3.6 0 0 1 10 5.6 3.6 3.6 0 0 1 16.5 8c0 5.2-6.5 9-6.5 9Z" stroke="currentColor" stroke-width="1.3"/></svg>
+          Избранное
+        </button>
+        <button class="tool-button" id="surprise-button" type="button">Удиви меня <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+    <p class="empty-results" id="empty-results" hidden>Похоже, эта история пока не на нашей полке.</p>
+    <div id="collections"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="#top">тихая.полка</a>
+      <span>Небольшой магазин больших миров</span>
+      <span>Цены указаны в тенге и приведены для примера</span>
+      <span>Фото изданий: <a href="https://www.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon</a></span>
+    </div>
+  </footer>
+
+  <div class="cart-backdrop" id="cart-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="cart-heading">
+      <h2 id="cart-title">Ваша корзина</h2>
+      <button class="icon-button" id="cart-close" type="button" aria-label="Закрыть корзину">×</button>
+    </div>
+    <div class="cart-items" id="cart-items" aria-live="polite"></div>
+    <div class="cart-bottom">
+      <div class="cart-total"><span>Итого</span><strong id="cart-total">0 ₸</strong></div>
+      <button class="checkout-button" id="checkout-button" type="button" disabled>Оформить заказ</button>
+      <p class="cart-caption">Пока только пример оформления — без оплаты и обязательств.</p>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
